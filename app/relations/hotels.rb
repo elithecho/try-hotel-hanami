@@ -2,8 +2,8 @@
 
 module Hotebase
   module Relations
-    class Hotel < Hotebase::DB::Relation
-      schema :hotel, infer: true
+    class Hotels < Hotebase::DB::Relation
+      schema :hotels, infer: true
     end
   end
 end

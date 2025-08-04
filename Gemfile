@@ -15,6 +15,7 @@ gem "dry-operation"
 gem "puma"
 gem "rake"
 gem "sqlite3"
+gem "http"
 
 group :development do
   gem "hanami-webconsole", "~> 2.2"

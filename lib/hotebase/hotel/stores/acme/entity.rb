@@ -2,9 +2,11 @@ module Hotebase
   module Hotel
     module Stores
       module Acme
-        class Entity
-          def initialize(data)
-            @data = data
+        module Entity
+          def self.build(data)
+            {
+              id: data['Id']
+            }
           end
         end
       end

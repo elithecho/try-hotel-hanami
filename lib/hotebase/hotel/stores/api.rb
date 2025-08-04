@@ -4,18 +4,28 @@ module Hotebase
   module Hotel
     module Stores
       class Api
-        def self.base_url
+        def base_url
           BASE_URL
         end
 
-        def self.fetch_all
-          get("#{base_url}")
+        def fetch_all
+          get.map do |data|
+            entity.build(data)
+          end
         end
 
         private
 
-        def self.resource_name
-          name.split('::').last.downcase.pluralize
+        def get
+          HTTP.get(self.base_url).then do |response|
+            raise "Error fetching data from #{url}" unless response.status.success?
+
+            JSON.parse(response.body.to_s)
+          end
+        end
+
+        def entity
+          self.class::ENTITY
         end
       end
     end

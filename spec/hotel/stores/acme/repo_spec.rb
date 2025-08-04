@@ -1,4 +1,5 @@
 RSpec.describe Hotebase::Hotel::Stores::Acme::Repo do
+  # VCR works too
   let(:api_response) { load_fixture('api/acme.json') }
 
   subject(:repo) { described_class.new }

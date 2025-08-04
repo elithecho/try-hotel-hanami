@@ -17,6 +17,11 @@ module Hotebase
 
         puts "Consolidated Data:"
         puts grouped
+
+        grouped.map do |pub_id, data|
+          # TODO: merge data with logic
+          # upsert logic
+        end
       end
     end
   end

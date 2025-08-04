@@ -10,7 +10,7 @@ module Hotebase
         end
 
         def fetch_all
-          get.map do |data|
+          call_api.map do |data|
             data = DataWrapper.new(data)
             map data
           end
@@ -18,16 +18,25 @@ module Hotebase
 
         private
 
-        def get
+        # Error in a single source should not halt the entire process.
+        def call_api
           HTTP.get(base_url).then do |response|
-            raise "Error fetching data from #{url}" unless response.status.success?
+            unless response.status.success?
+              Hanami.logger.warn "Failed to fetch data from #{base_url}: #{response.status}"
+              return []
+            end
 
             JSON.parse(response.body.to_s)
           end
+        rescue StandardError => e
+          Hanami.logger.error "An error occurred while fetching data from #{base_url}: #{e.message}"
+          []
         end
 
         def base_url
           self.class::BASE_URL
+        rescue NameError
+          raise NotImplementedError, "You must implement the BASE_URL constant"
         end
       end
     end

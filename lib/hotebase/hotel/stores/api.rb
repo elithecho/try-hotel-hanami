@@ -1,11 +1,12 @@
 # frozen_string_literal: true
+require "http"
 
 module Hotebase
   module Hotel
     module Stores
       class Api
         def map
-          raise NotImplementedError, 'You must implement the map method'
+          raise NotImplementedError, "You must implement the map method"
         end
 
         def fetch_all
@@ -17,20 +18,16 @@ module Hotebase
 
         private
 
-        def base_url
-          BASE_URL
-        end
-
         def get
-          HTTP.get(self.base_url).then do |response|
+          HTTP.get(base_url).then do |response|
             raise "Error fetching data from #{url}" unless response.status.success?
 
             JSON.parse(response.body.to_s)
           end
         end
 
-        def entity
-          self.class::ENTITY
+        def base_url
+          self.class::BASE_URL
         end
       end
     end

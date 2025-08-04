@@ -5,28 +5,13 @@ module Hotebase
     module Stores
       module Paperflies
         class Repo < ::Hotebase::Hotel::Stores::Api
-          BASE_URL   = 'https://5f2be0b4ffc88500167b85a0.mockapi.io/suppliers/paperflies'
+          BASE_URL = 'https://5f2be0b4ffc88500167b85a0.mockapi.io/suppliers/paperflies'
 
           def map(data)
             {
-              pub_id: data['hotel_id'],
+              id: data['hotel_id'],
               destination_id: data['destination_id'],
-              name: data['hotel_name'],
-              description: data['details'],
-              loc_city: data.dig('location', 'country'),
-              loc_country: data.dig('location', 'country'),
-
-              location: {
-                address: data.dig('location', 'address')
-              },
-              
-              amenities: {
-                general: data.dig('amenities', 'general') || [],
-                room: data.dig('amenities', 'room') || []
-              },
-              
-              images: data['images'] || {},
-              booking_conditions: data['booking_conditions'] || []
+              description: data['description'],
             }
           end
         end

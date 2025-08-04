@@ -3,6 +3,8 @@ module Hotebase
     class Warehouse
       SOURCES = [
         Hotebase::Hotel::Stores::AcmeRepo,
+        Hotebase::Hotel::Stores::AcmeRepo,
+        Hotebase::Hotel::Stores::AcmeRepo,
       ]
 
       def initialize(sources = SOURCES)

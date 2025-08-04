@@ -4,17 +4,22 @@ module Hotebase
   module Hotel
     module Stores
       class Api
-        def base_url
-          BASE_URL
+        def map
+          raise NotImplementedError, 'You must implement the map method'
         end
 
         def fetch_all
           get.map do |data|
-            entity.build(data)
+            data = DataWrapper.new(data)
+            map data
           end
         end
 
         private
+
+        def base_url
+          BASE_URL
+        end
 
         def get
           HTTP.get(self.base_url).then do |response|

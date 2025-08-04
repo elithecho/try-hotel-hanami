@@ -1,5 +1,5 @@
-RSpec.describe Hotebase::Hotel::Stores::Acme::Repo do
-  let(:api_response) { load_fixture('api/acme.json') }
+RSpec.describe Hotebase::Hotel::Stores::Patagonia::Repo do
+  let(:api_response) { load_fixture('api/patagonia.json') }
 
   subject(:repo) { described_class.new }
 
@@ -22,7 +22,7 @@ RSpec.describe Hotebase::Hotel::Stores::Acme::Repo do
       expect(entities.first[:pub_id]).to eq('iJhz')
       expect(entities.first[:destination_id]).to eq(5432)
       expect(entities.first[:name]).to eq('Beach Villas Singapore')
-      expect(entities.first[:description]).to eq("This 5 star hotel is located on the coastline of Singapore.")
+      expect(entities.first[:description]).to match(/Located at the western tip of Resorts World Sentosa, guests at the/)
     end
   end
 end

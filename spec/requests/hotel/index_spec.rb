@@ -55,7 +55,7 @@ RSpec.describe "GET /api/v1/hotels", type: :request do
         json_response = JSON.parse(last_response.body)
         expect(json_response).to have_key("hotels")
         expect(json_response["hotels"].size).to eq(1)
-        expect(json_response["hotels"][0]["pub_id"]).to eq("iJhz")
+        expect(json_response["hotels"][0]["id"]).to eq("iJhz")
       end
     end
   end

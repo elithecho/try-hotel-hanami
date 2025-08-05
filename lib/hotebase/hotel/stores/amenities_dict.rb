@@ -14,14 +14,15 @@ module Hotebase
           'bathtub' => ['Tub', 'bathtub'],
         }
 
-        def self.sort_amenities(amenities)
-          result = { 'general' => [], 'room' => [] }
+        def self.sort(amenities)
+          result = { general: [], room: [] }
+          return result unless amenities.is_a?(Array) && amenities.any?
 
           amenities.each do |amenity|
             dict = new(amenity)
             category = dict.category
             normalized = dict.normal_name
-            result[category] << normalized if category && normalized
+            result[category.to_sym] << normalized if category && normalized
           end
 
           result

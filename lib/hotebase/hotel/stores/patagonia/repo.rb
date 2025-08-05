@@ -22,33 +22,20 @@ module Hotebase
                 country: data['country'],
               },
 
-              amenities: {
-                general: [],
-                room: normalize_amenities(data['amenities'])
-              },
-
+              amenities: AmenitiesDict.sort(data['amenities']),
               images: normalize_images(data['images']),
-
               booking_conditions: []
             }
           end
 
           private
 
-          def normalize_amenities(amenities)
-            return [] unless amenities.is_a?(Array)
-            
-            amenities.map do |amenity|
-              amenity.strip.downcase.gsub(/\s+/, ' ')
-            end
-          end
-
           def normalize_images(images)
-            return { rooms: [], site: [], amenities: [] } unless images.is_a?(Hash)
+            return { rooms: [], site: [], amenities: [] } if images.nil?
 
             {
               rooms: normalize_image_array(images['rooms']),
-              site: [],
+              site: normalize_image_array(images['site']),
               amenities: normalize_image_array(images['amenities'])
             }
           end

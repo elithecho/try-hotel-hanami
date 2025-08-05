@@ -29,17 +29,7 @@ module Hotebase
                 country: normalize_country(data['Country']),
               },
 
-              amenities: {
-                general: normalize_facilities(data['Facilities']),
-                room: []
-              },
-
-              images: {
-                rooms: [],
-                site: [],
-                amenities: []
-              },
-
+              amenities: AmenitiesDict.sort(data['Facilities']),
               booking_conditions: []
             }
           end

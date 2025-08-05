@@ -13,7 +13,7 @@ module Hotebase
           # if its a string, chomp it
           value = @data[key.to_s] || @data[key.to_sym]
           return value.strip if value.is_a?(String)
-          return value.map(&:strip!) if array_of_string(value)
+          return value.map(&:strip) if array_of_string(value)
 
           value
         end

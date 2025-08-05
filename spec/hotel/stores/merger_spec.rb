@@ -1,9 +1,11 @@
 RSpec.describe Hotebase::Hotel::Merger do
   let(:acme_data) { load_fixture('api/acme.json') }
   let(:patagonia_data) { load_fixture('api/patagonia.json') }
+  let(:paperflies_data) { load_fixture('api/paperflies.json') }
 
   let(:acme_result) { Hotebase::Hotel::Stores::Acme::Repo.new(acme_data).fetch_all.first }
   let(:patagonia_result) { Hotebase::Hotel::Stores::Patagonia::Repo.new(patagonia_data).fetch_all.first }
+  let(:paperflies_result) { Hotebase::Hotel::Stores::Paperflies::Repo.new(paperflies_data).fetch_all.first }
 
   let(:merger) { described_class.new }
 
@@ -24,14 +26,20 @@ RSpec.describe Hotebase::Hotel::Merger do
     it 'merges location data' do
       merged_data = merger.merge(acme_result, patagonia_result)
 
-      puts merged_data[:location_data]
       expect(merged_data[:location_data]).to eq({
         lat: 1.264751,
-        long: 103.824006,
+        lng: 103.824006,
         address: '8 Sentosa Gateway, Beach Villas, 098269',
         country: 'Singapore',
         city: 'Singapore',
       }.to_json)
+    end
+
+    it 'merges images' do
+      merged_data = merger.merge(paperflies_result, patagonia_result)
+      images = JSON.parse(merged_data[:image_data], symbolize_names: true)
+
+      expect(images[:rooms].length).to be > 2
     end
   end
 end

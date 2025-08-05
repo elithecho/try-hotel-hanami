@@ -18,27 +18,40 @@ module Hotebase
                 address: data.dig('location', 'address'),
                 country: data.dig('location', 'country')
               },
-              amenities: data['amenities'],
-              images: transform_images(data['images']),
+              amenities: flatten_amenities(data['amenities']),
+              images: normalize_images(data['images']),
               booking_conditions: data['booking_conditions']
             }
           end
 
           private
 
-          def transform_images(images)
-            return {} unless images
+          def flatten_amenities(amenities)
+            general = amenities['general']&.map(&:strip) || []
+            room = amenities['room']&.map(&:strip) || []
 
-            transformed = {}
-            images.each do |category, image_list|
-              transformed[category] = image_list.map do |image|
-                {
-                  link: image['link'],
-                  description: image['caption']
-                }
-              end
+            AmenitiesDict.sort(general + room)
+          end
+
+          def normalize_images(images)
+            return { rooms: [], site: [], amenities: [] } if images.nil?
+
+            {
+              rooms: normalize_image_array(images['rooms']),
+              site: normalize_image_array(images['site']),
+              amenities: normalize_image_array(images['amenities'])
+            }
+          end
+
+          def normalize_image_array(image_array)
+            return [] unless image_array.is_a?(Array)
+
+            image_array.map do |image|
+              {
+                link: image['link'],
+                description: image['caption']
+              }
             end
-            transformed
           end
         end
       end

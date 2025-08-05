@@ -25,5 +25,15 @@ RSpec.describe Hotebase::Hotel::Stores::Paperflies::Repo do
       expect(entity[:name]).to eq('Beach Villas Singapore')
       expect(entity[:description]).to match(/Surrounded by tropical gardens/)
     end
+
+    it 'ensures amenities are present' do
+      entities = repo.fetch_all
+      entity = entities.first
+
+      expect(entity[:amenities][:general]).to be_a Array
+      expect(entity[:amenities][:general].length).to be > 0
+      expect(entity[:amenities][:room]).to be_a Array
+      expect(entity[:amenities][:room].length).to be > 0
+    end
   end
 end

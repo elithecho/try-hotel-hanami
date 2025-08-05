@@ -1,20 +1,20 @@
 require 'spec_helper'
 
 RSpec.describe Hotebase::Hotel::Stores::AmenitiesDict do
-  describe '.sort_amenities' do
+  describe '.sort' do
     it 'sorts amenities into general and room categories' do
       amenities = ['WiFi', 'aircon', 'outdoor pool', 'Coffee machine', 'business center']
 
-      result = described_class.sort_amenities(amenities)
+      result = described_class.sort(amenities)
 
-      expect(result['general']).to include('wifi', 'outdoor pool', 'business center')
-      expect(result['room']).to include('aircon', 'coffee machine')
+      expect(result[:general]).to include('wifi', 'outdoor pool', 'business center')
+      expect(result[:room]).to include('aircon', 'coffee machine')
     end
 
     it 'handles empty amenities list' do
-      result = described_class.sort_amenities([])
+      result = described_class.sort([])
 
-      expect(result).to eq({ 'general' => [], 'room' => [] })
+      expect(result).to eq({ general: [], room: [] })
     end
   end
 

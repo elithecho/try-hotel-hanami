@@ -4,7 +4,7 @@ RSpec.describe Hotebase::Hotel::Stores::Patagonia::Repo do
   subject(:repo) { described_class.new }
 
   before do
-    allow(repo).to receive(:get).and_return(api_response)
+    allow(repo).to receive(:call_api).and_return(api_response)
   end
 
   describe '#fetch_all' do

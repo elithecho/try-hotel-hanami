@@ -22,6 +22,14 @@ module Hotebase
         hotels.dataset
           .insert_conflict({
             target: [:pub_id],
+            update: {
+              location_data: Sequel[:excluded][:location_data],
+              image_data: Sequel[:excluded][:image_data],
+              name: Sequel[:excluded][:name],
+              description: Sequel[:excluded][:description],
+              amenities_data: Sequel[:excluded][:amenities_data],
+              booking_conditions: Sequel[:excluded][:booking_conditions],
+            }
           })
           .multi_insert(bulk_data)
       end

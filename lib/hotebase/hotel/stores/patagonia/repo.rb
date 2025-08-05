@@ -16,14 +16,39 @@ module Hotebase
 
               location: {
                 lat: data['lat'],
-                long: data['lng'],
+                lng: data['lng'],
                 address: data['address'],
                 city: data['city'],
                 country: data['country'],
-
               },
-              facilities: data['amenities'] || [],
+
+              amenities: AmenitiesDict.sort(data['amenities']),
+              images: normalize_images(data['images']),
+              booking_conditions: []
             }
+          end
+
+          private
+
+          def normalize_images(images)
+            return { rooms: [], site: [], amenities: [] } if images.nil?
+
+            {
+              rooms: normalize_image_array(images['rooms']),
+              site: normalize_image_array(images['site']),
+              amenities: normalize_image_array(images['amenities'])
+            }
+          end
+
+          def normalize_image_array(image_array)
+            return [] unless image_array.is_a?(Array)
+
+            image_array.map do |image|
+              {
+                link: image['url'],
+                description: image['description']
+              }
+            end
           end
         end
       end

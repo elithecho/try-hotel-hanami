@@ -4,7 +4,7 @@ RSpec.describe Hotebase::Hotel::Stores::Paperflies::Repo do
   subject(:repo) { described_class.new }
 
   before do
-    allow(repo).to receive(:get).and_return(api_response)
+    allow(repo).to receive(:call_api).and_return(api_response)
   end
 
   describe '#fetch_all' do
@@ -23,7 +23,7 @@ RSpec.describe Hotebase::Hotel::Stores::Paperflies::Repo do
       expect(entity[:pub_id]).to eq('iJhz')
       expect(entity[:destination_id]).to eq(5432)
       expect(entity[:name]).to eq('Beach Villas Singapore')
-      expect(entity[:description]).to eq(/Surrounded by tropical gardens/)
+      expect(entity[:description]).to match(/Surrounded by tropical gardens/)
     end
   end
 end

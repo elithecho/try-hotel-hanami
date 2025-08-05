@@ -6,9 +6,9 @@ module Hotebase
   module Hotel
     class Warehouse
       SOURCES = [
-        Hotebase::Hotel::Stores::Acme::Repo,
-        Hotebase::Hotel::Stores::Paperflies::Repo,
-        Hotebase::Hotel::Stores::Patagonia::Repo,
+        Hotebase::Hotel::Stores::Acme::Repo.new,
+        Hotebase::Hotel::Stores::Paperflies::Repo.new,
+        Hotebase::Hotel::Stores::Patagonia::Repo.new,
       ]
 
       def initialize(
@@ -16,7 +16,7 @@ module Hotebase
         hotel_repo: Hotebase::Repos::HotelRepo.new,
         merger: Hotebase::Hotel::Merger.new
       )
-        @sources = sources.map(&:new)
+        @sources = sources
         @hotel_repo = hotel_repo
         @merger = merger
       end

@@ -17,6 +17,8 @@ module Hotebase
             city: any(:location, :city)
           }.to_json,
           image_data: merge_images.to_json,
+          amenities_data: merge_amenities.to_json,
+          booking_conditions: largest_array(:booking_conditions).to_json,
         }
       end
 
@@ -38,8 +40,18 @@ module Hotebase
         @hotels.map { |h| h.dig(*keys) }.compact || []
       end
 
+      # Like longest, but returns the largest array (most comprehensive)
+      def largest_array(*key)
+        fetch(*key).max_by do |array|
+          return 0 unless array.is_a?(Array)
+
+          array.length
+        end
+      end
+
       def merge_images
         all_images = fetch(:images).compact
+        return {} if all_images.empty?
 
         combined = all_images.each_with_object({}) do |image_hash, result|
           image_hash.each do |category, images|
@@ -50,6 +62,21 @@ module Hotebase
         end
 
         combined.transform_values { |images| images.uniq { |image| image[:link] } }
+      end
+
+      def merge_amenities
+        all_amenities = fetch(:amenities).compact
+        return {} if all_amenities.empty?
+
+        combined = all_amenities.each_with_object({ general: [], room: [] }) do |amenity_hash, result|
+          amenity_hash.each do |category, amenities|
+            category_key = category.to_sym
+            result[category_key] ||= []
+            result[category_key].concat(amenities) if amenities.is_a?(Array)
+          end
+        end
+
+        combined.transform_values(&:uniq)
       end
     end
   end

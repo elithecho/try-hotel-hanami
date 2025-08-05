@@ -41,5 +41,20 @@ RSpec.describe Hotebase::Hotel::Merger do
 
       expect(images[:rooms].length).to be > 2
     end
+
+    it 'gets the correct booking conditions' do
+      merged_data = merger.merge(paperflies_result, patagonia_result)
+      booking_conditions = JSON.parse(merged_data[:booking_conditions])
+
+      expect(booking_conditions.length).to be > 0
+    end
+
+    it 'merges amenities' do
+      merged_data = merger.merge(acme_result, patagonia_result)
+      amenities = JSON.parse(merged_data[:amenities_data], symbolize_names: true)
+
+      expect(amenities[:general].length).to be > 0
+      expect(amenities[:room].length).to be > 0
+    end
   end
 end

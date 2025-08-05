@@ -12,7 +12,8 @@ module Hotebase
             {
               pub_id: data['hotel_id'],
               destination_id: data['destination_id'],
-              description: data['description'],
+              name: data['hotel_name'],
+              description: data['details'],
             }
           end
         end

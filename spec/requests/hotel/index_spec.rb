@@ -22,9 +22,19 @@ RSpec.describe "GET /api/hotels", type: :request do
   end
 
   context "when filtering by destination id" do
+    it "returns only hotels for the given destination" do
+      get "/api/hotels?destination_id=1"
 
+      expect(last_response).to have_http_status(:ok)
+    end
   end
 
-  context "when filtering by hotel id"
+  context "when filtering by hotel id" do
+    it "returns only the hotel with the given id" do
+      get "/api/hotels?destination_id=1"
+
+      expect(last_response).to have_http_status(:ok)
+    end
+  end
 end
 

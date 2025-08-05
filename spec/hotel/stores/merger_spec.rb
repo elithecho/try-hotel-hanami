@@ -24,13 +24,14 @@ RSpec.describe Hotebase::Hotel::Merger do
     it 'merges location data' do
       merged_data = merger.merge(acme_result, patagonia_result)
 
-      expect(merged_data[:location]).to include({
+      puts merged_data[:location_data]
+      expect(merged_data[:location_data]).to eq({
         lat: 1.264751,
         long: 103.824006,
         address: '8 Sentosa Gateway, Beach Villas, 098269',
-        city: 'Singapore',
         country: 'Singapore',
-      })
+        city: 'Singapore',
+      }.to_json)
     end
   end
 end

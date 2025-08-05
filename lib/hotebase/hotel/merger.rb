@@ -9,13 +9,13 @@ module Hotebase
           destination_id: any(:destination_id),
           name: longest(:name),
           description: longest(:description),
-          location: {
+          location_data: {
             lat: any(:location, :lat),
             long: any(:location, :long),
             address: any(:location, :address),
             country: any(:location, :country),
             city: any(:location, :city)
-          }
+          }.to_json
         }
       end
 

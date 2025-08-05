@@ -10,13 +10,6 @@ ROM::SQL.migration do
 
       column :name, String, null: false
 
-
-      column :loc_lat, Float, null: false
-      column :loc_long, Float, null: false
-      column :loc_location, String, null: false
-      column :loc_city, String, null: false
-      column :loc_country, String, null: false
-
       column :description, String, null: false
       column :location_data, "text", null: false
       column :image_data, "text"

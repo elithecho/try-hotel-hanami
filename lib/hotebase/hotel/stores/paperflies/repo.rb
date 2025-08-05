@@ -10,7 +10,7 @@ module Hotebase
 
           def map(data)
             {
-              id: data['hotel_id'],
+              pub_id: data['hotel_id'],
               destination_id: data['destination_id'],
               description: data['description'],
             }

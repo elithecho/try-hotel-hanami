@@ -25,13 +25,11 @@ module Hotebase
         all_data = @sources.map(&:fetch_all).flatten!
         grouped = all_data.group_by { |data| data[:pub_id] }
 
-        grouped.map do |pub_id, hotels|
-          final_hotel = @merger.merge(*hotels)
-          puts "Merging data for pub_id: #{pub_id}"
-          puts "Final Hotel Data: #{final_hotel}"
-
-          # upsert logic
+        result = grouped.map do |_pub_id, hotels|
+          @merger.merge(*hotels)
         end
+
+        @hotel_repo.upsert(result)
       end
     end
   end

@@ -7,16 +7,16 @@ module Hotebase
         where(id: id).one
       end
 
-      def upsert(pub_id, data)
-        existing = by_id(pub_id)
+      def all
+        hotels.to_a
+      end
 
-        if existing
-          # Update existing record
-          existing.update(data)
-        else
-          # Insert new record
-          create(data.merge(id: pub_id))
-        end
+      def upsert(bulk_data)
+        hotels.dataset
+          .insert_conflict({
+            target: [:pub_id],
+          })
+          .multi_insert(bulk_data)
       end
     end
   end

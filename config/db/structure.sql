@@ -9,8 +9,8 @@ CREATE TABLE `hotels`(
   `image_data` TEXT DEFAULT(NULL) NULL,
   `created_at` timestamp DEFAULT(datetime(CURRENT_TIMESTAMP, 'localtime')) NULL,
   `updated_at` timestamp DEFAULT(datetime(CURRENT_TIMESTAMP, 'localtime')) NULL,
-  `booking_conditions` TEXT DEFAULT('{}') NOT NULL,
-  `anemities_data` TEXT DEFAULT('{}') NOT NULL
+  `booking_conditions` TEXT DEFAULT('{}') NULL,
+  `amenities_data` TEXT DEFAULT('{}') NULL
 );
 CREATE UNIQUE INDEX `hotels_pub_id_index` ON `hotels`(`pub_id`);
 CREATE INDEX `hotels_destination_id_index` ON `hotels`(`destination_id`);

@@ -22,5 +22,9 @@ jobs:
         ruby-version: ${{ matrix.ruby-version }}
         bundler-cache: true
 
+    - name: Create test database
+      run: |
+        bundle exec hanami db create --env test
+
     - name: Run tests
       run: bundle exec rspec

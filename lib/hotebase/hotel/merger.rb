@@ -11,7 +11,7 @@ module Hotebase
           description: longest(:description),
           location_data: {
             lat: any(:location, :lat),
-            long: any(:location, :long),
+            lng: any(:location, :long),
             address: any(:location, :address),
             country: any(:location, :country),
             city: any(:location, :city)

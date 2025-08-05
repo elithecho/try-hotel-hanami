@@ -7,7 +7,7 @@ module Hotebase
         @hotel = hotel
       end
 
-      EXCEPT_ATTRIBUTES = %i[id location_data image_data created_at updated_at].freeze
+      EXCEPT_ATTRIBUTES = %i[id pub_id location_data image_data created_at updated_at].freeze
 
       def serialize
         hotel_attributes = @hotel.attributes.except(*EXCEPT_ATTRIBUTES)
@@ -15,7 +15,6 @@ module Hotebase
 
         {
           id: @hotel.pub_id,
-          pub_id: @hotel.pub_id,
           **hotel_attributes,
           location: {
             lat: location[:lat],

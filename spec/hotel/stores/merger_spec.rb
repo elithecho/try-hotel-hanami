@@ -35,7 +35,7 @@ RSpec.describe Hotebase::Hotel::Merger do
       }.to_json)
     end
 
-    it 'merges images' do
+    it 'merges image_data' do
       merged_data = merger.merge(paperflies_result, patagonia_result)
       images = JSON.parse(merged_data[:image_data], symbolize_names: true)
 

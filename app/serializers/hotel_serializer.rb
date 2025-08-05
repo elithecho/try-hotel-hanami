@@ -14,6 +14,7 @@ module Hotebase
         location = JSON.parse(@hotel.location_data, symbolize_names: true)
         amenities = JSON.parse(@hotel.amenities_data, symbolize_names: true)
         booking_conditions = JSON.parse(@hotel.booking_conditions)
+        images = JSON.parse(@hotel.image_data, symbolize_names: true)
 
         {
           id: @hotel.pub_id,
@@ -21,6 +22,7 @@ module Hotebase
           location:,
           amenities:,
           booking_conditions:,
+          images:
         }
       end
     end

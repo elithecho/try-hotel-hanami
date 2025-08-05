@@ -5,18 +5,28 @@ module Hotebase
   module Hotel
     module Stores
       class Api
+        def initialize(remote_data = {})
+          @remote_data = remote_data
+        end
+
         def map
           raise NotImplementedError, "You must implement the map method"
         end
 
         def fetch_all
-          call_api.map do |data|
+          remote_data.map do |data|
             data = DataWrapper.new(data)
             map data
           end
         end
 
         private
+
+        def remote_data
+          return call_api if @remote_data.empty?
+
+          @remote_data
+        end
 
         # Error in a single source should not halt the entire process.
         def call_api

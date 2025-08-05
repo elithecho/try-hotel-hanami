@@ -5,6 +5,7 @@ module Hotebase
     module Stores
       class DataWrapper < Hash
         def initialize(data)
+          super()
           @data = data
         end
 

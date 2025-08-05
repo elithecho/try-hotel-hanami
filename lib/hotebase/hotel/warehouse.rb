@@ -1,3 +1,7 @@
+# frozen_string_literal: true
+
+require 'progress_bar'
+
 module Hotebase
   module Hotel
     class Warehouse
@@ -7,19 +11,25 @@ module Hotebase
         Hotebase::Hotel::Stores::Patagonia::Repo,
       ]
 
-      def initialize(sources = SOURCES)
+      def initialize(
+        sources: SOURCES,
+        hotel_repo: Hotebase::Repos::HotelRepo.new,
+        merger: Hotebase::Hotel::Merger.new
+      )
         @sources = sources.map(&:new)
+        @hotel_repo = hotel_repo
+        @merger = merger
       end
 
-      def consolidate
+      def fetch
         all_data = @sources.map(&:fetch_all).flatten!
         grouped = all_data.group_by { |data| data[:pub_id] }
 
-        puts "Consolidated Data:"
-        puts grouped
+        grouped.map do |pub_id, hotels|
+          final_hotel = @merger.merge(*hotels)
+          puts "Merging data for pub_id: #{pub_id}"
+          puts "Final Hotel Data: #{final_hotel}"
 
-        grouped.map do |pub_id, data|
-          # TODO: merge data with logic
           # upsert logic
         end
       end

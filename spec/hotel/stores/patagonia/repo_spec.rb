@@ -17,12 +17,13 @@ RSpec.describe Hotebase::Hotel::Stores::Patagonia::Repo do
 
     it 'returns entities with some attributes' do
       entities = repo.fetch_all
+      entity = entities.first
 
       # Sample a few attributes to check
-      expect(entities.first[:pub_id]).to eq('iJhz')
-      expect(entities.first[:destination_id]).to eq(5432)
-      expect(entities.first[:name]).to eq('Beach Villas Singapore')
-      expect(entities.first[:description]).to match(/Located at the western tip of Resorts World Sentosa, guests at the/)
+      expect(entity[:pub_id]).to eq('iJhz')
+      expect(entity[:destination_id]).to eq(5432)
+      expect(entity[:name]).to eq('Beach Villas Singapore')
+      expect(entity[:description]).to match(/Located at the western tip of Resorts World Sentosa, guests at the/)
     end
   end
 end

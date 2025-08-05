@@ -17,12 +17,13 @@ RSpec.describe Hotebase::Hotel::Stores::Paperflies::Repo do
 
     it 'returns entities with some attributes' do
       entities = repo.fetch_all
+      entity = entities.first
 
       # Sample a few attributes to check
-      expect(entities.first[:pub_id]).to eq('iJhz')
-      expect(entities.first[:destination_id]).to eq(5432)
-      expect(entities.first[:name]).to eq('Beach Villas Singapore')
-      expect(entities.first[:description]).to eq("Surrounded by tropical gardens, these upscale villas in elegant Colonial-style buildings are part of the Resorts World Sentosa complex and a 2-minute walk from the Waterfront train station. Featuring sundecks and pool, garden or sea views, the plush 1- to 3-bedroom villas offer free Wi-Fi and flat-screens, as well as free-standing baths, minibars, and tea and coffeemaking facilities. Upgraded villas add private pools, fridges and microwaves; some have wine cellars. A 4-bedroom unit offers a kitchen and a living room. There's 24-hour room and butler service. Amenities include posh restaurant, plus an outdoor pool, a hot tub, and free parking.")
+      expect(entity[:pub_id]).to eq('iJhz')
+      expect(entity[:destination_id]).to eq(5432)
+      expect(entity[:name]).to eq('Beach Villas Singapore')
+      expect(entity[:description]).to eq(/Surrounded by tropical gardens/)
     end
   end
 end

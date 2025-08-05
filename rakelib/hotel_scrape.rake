@@ -6,11 +6,4 @@ namespace :hotel_populate do
     crawler = Hotebase::Crawler::Hotel.new
     crawler.crawl_hotels
   end
-
-  desc "Delete all hotels from the database"
-  task delete_all: :environment do
-    require 'hotebase/relations/hotel'
-
-    Hotebase::Relations::Hotel.delete_all
-  end
 end

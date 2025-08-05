@@ -17,6 +17,8 @@ gem "rake"
 gem "sqlite3"
 gem "http"
 
+gem "progress_bar"
+
 group :development do
   gem "hanami-webconsole", "~> 2.2"
 end

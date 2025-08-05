@@ -17,7 +17,10 @@ module Hotebase
               location: {
                 lat: data['lat'],
                 long: data['lng'],
-                address: data['address']
+                address: data['address'],
+                city: data['city'],
+                country: data['country'],
+
               },
               facilities: data['amenities'] || [],
             }

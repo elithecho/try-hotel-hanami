@@ -4,7 +4,7 @@ module Hotebase
       class AmenitiesDict
         # Buids a dictionary of amenities with their normalized names and categories.
         AMENITIES = {
-          'general' => ["outdoor pool", "indoor pool", "wifi", "business center", "childcare", "parking", "bar", "dry cleaning", "breakfast", "concierge"],
+          'general' => ["outdoor pool", "indoor pool", "pool", "wifi", "business center", "childcare", "parking", "bar", "dry cleaning", "breakfast", "concierge"],
           'room' => ["aircon", "tv", "coffee machine", "kettle", "hair dryer", "iron", "bathtub", "minibar"],
         }
 

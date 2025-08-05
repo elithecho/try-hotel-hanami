@@ -9,7 +9,7 @@ module Hotebase
         def serialize_collection(collection)
           collection.map do |item|
             new(item).serialize
-          end.to_json
+          end
         end
       end
     end
